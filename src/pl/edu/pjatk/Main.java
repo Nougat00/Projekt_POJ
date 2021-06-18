@@ -12,6 +12,16 @@ public class Main {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Organizer");
         frame.setSize(288, 350);
-        JPanel firstScreen = new JPanel(new GridLayout(2,1,5,5));
+        JPanel firstScreen = new JPanel(new GridLayout(4,1,5,5));
+        JTextField login=new JTextField();
+        JTextField pass=new JTextField();
+        JButton log = new JButton("Login");
+        JButton exit=new JButton("EXIT");
+        firstScreen.add(login);
+        firstScreen.add(pass);
+        firstScreen.add(log);
+        firstScreen.add(exit);
+        frame.add(firstScreen);
+        frame.setVisible(true);
     }
 }

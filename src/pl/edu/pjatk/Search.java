@@ -62,10 +62,16 @@ public class Search {
                 search.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(!searchResult(user, text.getText()).equals(null)){
-
+                        if(searchResult(user, text.getText()).size()>0){
+                            for (int i = 0; i <searchResult(user, text.getText()).size(); i++) {
+                                result.setText(result.getText()+String.valueOf(i)+". ");
+                                for (int j = 0; j < searchResult(user, text.getText()).get(i).size(); j++) {
+                                    result.setText(result.getText()+" "+searchResult(user,text.getText()).get(i).get(j));
+                                }
+                                result.setText("\n");
+                            }
                         }
-
+                        else result.setText("Nie znaleziono nikogo");
                     }
                 });
                 logout.addActionListener(new ActionListener() {
@@ -103,22 +109,23 @@ public class Search {
     }
 
     private static Vector<Vector<String>> searchResult(String user, String name) {
+        Vector<Vector<String>> result = null;
         try (Scanner in = new Scanner(new File("./data.txt"))) {
-            Vector<Vector<String>> result = null;
             Vector<String> str = null;
             while (in.hasNext()) {
                 String[] fromFile = in.nextLine().split(",");
                 if (fromFile[0].equals(user)) {
                     for (int i = 1; i < fromFile.length; i++) {
+                        System.out.println(fromFile[i]);
                         str.add(fromFile[i]);
                     }
                     result.add(str);
                 }
             }
-            return result;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        return result;
     }
 }
 

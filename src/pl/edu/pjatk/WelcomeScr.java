@@ -37,7 +37,7 @@ public class WelcomeScr {
                 {
                     mess.setText("Git");
                     frame.setVisible(false);
-                    Choice.window(true);
+                    Choice.window(true, login.getText());
                 }
                 else
                 {
@@ -58,15 +58,22 @@ public class WelcomeScr {
         try (Scanner in=new Scanner(new File("C:\\Users\\barte\\Documents\\PJAKT\\OneDrive - Polsko-Japońska Akademia Technik Komputerowych\\POJ\\Projekt_POJ\\src\\login.txt")))
         {
             String[] fromFile = in.nextLine().split(" ");
-            if(fromFile[0].equals(login))
-            {
-                if(fromFile[1].equals(pass))
+            boolean flag=false;
+
+            for (int i = 0; i < fromFile.length; i=i+2) {
+                if(fromFile[i].equals(login))
                 {
-                    return true;
+                    System.out.println("penis");
+                    if(fromFile[i+1].equals(pass))
+                    {
+                        System.out.println("cipa");
+                        return true;
+                    }
+                    else flag=false;
                 }
-                else return false;
+                else flag=false;
             }
-            else return false;
+            return flag;
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

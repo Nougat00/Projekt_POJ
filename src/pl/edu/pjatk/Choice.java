@@ -62,6 +62,13 @@ public class Choice {
                frame.dispose();
            }
        });
+       delete.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               Delete.window(true,user);
+               frame.dispose();
+           }
+       });
 
 
     }

@@ -46,7 +46,9 @@ public class Modify {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (text.getText().equals(""))
-                    nameSearch.dispose();
+                {
+                    result.setText("Wpisz rekord");
+                }
                 modifier(user, Integer.parseInt(text.getText()));
                 nameSearch.dispose();
             }

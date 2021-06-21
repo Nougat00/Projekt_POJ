@@ -1,8 +1,5 @@
 user,sadasd,asdasda,asdasd,asda,
 user,user,user,user,user,
-admin,ian,dupa,798,0123na,
-admin,ian,dupa,Honk,dupa,
 admin,ian,sdniaondasd,nasonfoasda,dupa,
 admin,ian,sdniaondasdas,nasonfoasdas,dupa,
-admin,Jakub Gola,30/09/2001,Gdańsk,dupa,
 admin,Darek Karasiewicz,22/09/2000,Gdańsk,Dupa,

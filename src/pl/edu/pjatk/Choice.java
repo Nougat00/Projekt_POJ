@@ -54,6 +54,13 @@ public class Choice {
                frame.dispose();
            }
        });
+       modify.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               Modify.window(true, user);
+               frame.dispose();
+           }
+       });
 
 
     }

@@ -31,24 +31,32 @@ public class Modify {
         nameSearch.add(main);
         nameSearch.setVisible(true);
         nameSearch.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        if(searchSystem(user).size()>0) {
+        if (searchSystem(user).size() > 0) {
             for (int i = 0; i < searchSystem(user).size(); i++) {
-                result.setText(result.getText()+String.valueOf(i+1));
+                result.setText(result.getText() + String.valueOf(i + 1));
                 for (int j = 0; j < searchSystem(user).get(i).size(); j++) {
-                    result.setText(result.getText()+" "+searchSystem(user).get(i).get(j));
+                    result.setText(result.getText() + " " + searchSystem(user).get(i).get(j));
                 }
-                result.setText(result.getText()+"\n");
+                result.setText(result.getText() + "\n");
             }
         }
         modify.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(text.getText().equals(""))
-                nameSearch.dispose();
+                if (text.getText().equals(""))
+                    nameSearch.dispose();
                 modifier(user, Integer.parseInt(text.getText()));
                 nameSearch.dispose();
             }
         });
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                nameSearch.dispose();
+                Choice.window(true, user);
+            }
+        });
+
     }
 
     private static Vector<Vector<String>> searchSystem(String user) {
@@ -71,8 +79,8 @@ public class Modify {
         }
         return result;
     }
-    public static void modifier(String user, int record)
-    {
+
+    public static void modifier(String user, int record) {
         JFrame frame = new JFrame("Organizer");
         JPanel main = new JPanel(new BorderLayout());
         frame.setSize(500, 350);
@@ -108,10 +116,10 @@ public class Modify {
         frame.add(main);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        namebox.setText(searchSystem(user).get(record-1).get(0));
-        datebox.setText(searchSystem(user).get(record-1).get(1));
-        adresbox.setText(searchSystem(user).get(record-1).get(2));
-        avatarbox.setText(searchSystem(user).get(record-1).get(3));
+        namebox.setText(searchSystem(user).get(record - 1).get(0));
+        datebox.setText(searchSystem(user).get(record - 1).get(1));
+        adresbox.setText(searchSystem(user).get(record - 1).get(2));
+        avatarbox.setText(searchSystem(user).get(record - 1).get(3));
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -136,14 +144,13 @@ public class Modify {
                     }
                     if (flag) {
                         if ((!namebox.getText().equals("") || !datebox.getText().equals("") || !adresbox.getText().equals("") || !avatarbox.getText().equals("")) && flag) {
-                            dataAdd(user, namebox.getText(), datebox.getText(), adresbox.getText(), avatarbox.getText());
+                            dataModify(user, namebox.getText(), datebox.getText(), adresbox.getText(), avatarbox.getText(), record);
                             message.setText("Dane zostały pomyślnie dodane!");
                         } else {
                             message.setText("Czegoś brakuje gościu...");
                         }
                     }
-                }
-                catch (FileNotFoundException f) {
+                } catch (FileNotFoundException f) {
                     f.printStackTrace();
                 } catch (IOException f) {
                     f.printStackTrace();
@@ -154,15 +161,53 @@ public class Modify {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
-                Choice.window(true, user);
+                Modify.window(true, user);
             }
         });
     }
-    protected static void dataModify(String user, String name, String date, String adres, String avatar) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new FileWriter("data.txt", true));
-        BufferedReader br = new BufferedReader(new FileReader("data.txt"));
-        bw.append(user + "," + name + "," + date + "," + adres + "," + avatar+",");
-        bw.append("\n");
-        bw.close();
+
+    protected static void dataModify(String user, String name, String date, String adres, String avatar, int record) throws IOException {
+        PrintWriter writer = new PrintWriter("tmp.txt");
+        BufferedWriter bw = new BufferedWriter(new FileWriter("tmp.txt", true));
+        writer.print("");
+        writer.close();
+        try (Scanner in = new Scanner(new File("./data.txt"))) {
+            int help = 0;
+            while (in.hasNextLine()) {
+                String tmp = in.nextLine();
+                String[] fromFile = tmp.split(",");
+                if (fromFile[0].equals(user)) {
+                    help++;
+                    if (help == record) {
+                        bw.append(user + "," + name + "," + date + "," + adres + "," + avatar + ",");
+                        bw.append("\n");
+                    } else {
+                        bw.append(tmp);
+                        bw.append("\n");
+                    }
+                } else {
+                    bw.append(tmp);
+                    bw.append("\n");
+                }
+            }
+            bw.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        PrintWriter dataClear = new PrintWriter("data.txt");
+        dataClear.print("");
+        dataClear.close();
+        BufferedWriter dataReplace = new BufferedWriter(new FileWriter("data.txt", true));
+        try (Scanner out = new Scanner(new File("./tmp.txt"))) {
+            while (out.hasNextLine()) {
+                String tmp=out.nextLine();
+                System.out.println(tmp);
+                dataReplace.append(tmp);
+                dataReplace.append("\n");
+            }
+            dataReplace.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

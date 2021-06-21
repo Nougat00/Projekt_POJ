@@ -64,9 +64,9 @@ public class Search {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         Vector<Vector<String>> result_tmp=new Vector<>();
-                        if(searchResult(user, text.getText()).size()>0){
+                        if(searchSystem(user, text.getText(), 2).size()>0){
                             result.setText("");
-                            result_tmp=searchResult(user, text.getText());
+                            result_tmp=searchSystem(user, text.getText(),2);
                             int record=0;
                             for (int i = 0; i <result_tmp.size(); i++) {
                                 if(!result_tmp.get(i).isEmpty()) {
@@ -95,12 +95,144 @@ public class Search {
                 back.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        frame.dispose();
+                        nameSearch.dispose();
                         Choice.window(true, user);
                     }
                 });
+            }
+        });
+        date.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                JFrame nameSearch = new JFrame("Organizer");
+                nameSearch.setSize(500, 180);
+                JPanel main = new JPanel(new BorderLayout());
+                JButton logout = new JButton("Wyloguj");
+                JButton back = new JButton("Cofnij");
+                JButton search = new JButton("Szukaj");
+                JTextField text = new JTextField();
+                JTextArea result = new JTextArea();
+                result.setEditable(false);
+                JPanel upPanel = new JPanel(new GridLayout(1, 2));
+                JPanel downPanel = new JPanel(new GridLayout(1, 2));
+                upPanel.add(text);
+                upPanel.add(search);
+                downPanel.add(back);
+                downPanel.add(logout);
+                main.add(upPanel, BorderLayout.NORTH);
+                main.add(result, BorderLayout.CENTER);
+                main.add(downPanel, BorderLayout.SOUTH);
+                nameSearch.add(main);
+                nameSearch.setVisible(true);
+                nameSearch.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                search.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Vector<Vector<String>> result_tmp=new Vector<>();
+                        if(searchSystem(user, text.getText(), 2).size()>0){
+                            result.setText("");
+                            result_tmp=searchSystem(user, text.getText(), 2);
+                            int record=0;
+                            for (int i = 0; i <result_tmp.size(); i++) {
+                                if(!result_tmp.get(i).isEmpty()) {
+                                    record++;
+                                    result.setText(result.getText() + String.valueOf(record) + ". ");
+                                    for (int j = 0; j < result_tmp.get(i).size(); j++) {
+                                        result.setText(result.getText() + " " + result_tmp.get(i).get(j));
+                                    }
+                                    result.setText(result.getText() + "\n");
+                                }
+                            }
+                        }
+                        else {
+                            result.setText("");
+                            result.setText("Nie znaleziono nikogo");
+                        }
+                    }
+                });
 
+                logout.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        nameSearch.dispose();
+                        WelcomeScr.window(true);
+                    }
+                });
+                back.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        nameSearch.dispose();
+                        Choice.window(true, user);
+                    }
+                });
+            }
+        });
+        adres.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                JFrame nameSearch = new JFrame("Organizer");
+                nameSearch.setSize(500, 180);
+                JPanel main = new JPanel(new BorderLayout());
+                JButton logout = new JButton("Wyloguj");
+                JButton back = new JButton("Cofnij");
+                JButton search = new JButton("Szukaj");
+                JTextField text = new JTextField();
+                JTextArea result = new JTextArea();
+                result.setEditable(false);
+                JPanel upPanel = new JPanel(new GridLayout(1, 2));
+                JPanel downPanel = new JPanel(new GridLayout(1, 2));
+                upPanel.add(text);
+                upPanel.add(search);
+                downPanel.add(back);
+                downPanel.add(logout);
+                main.add(upPanel, BorderLayout.NORTH);
+                main.add(result, BorderLayout.CENTER);
+                main.add(downPanel, BorderLayout.SOUTH);
+                nameSearch.add(main);
+                nameSearch.setVisible(true);
+                nameSearch.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                search.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Vector<Vector<String>> result_tmp=new Vector<>();
+                        if(searchSystem(user, text.getText(), 3).size()>0){
+                            result.setText("");
+                            result_tmp=searchSystem(user, text.getText(), 3);
+                            int record=0;
+                            for (int i = 0; i <result_tmp.size(); i++) {
+                                if(!result_tmp.get(i).isEmpty()) {
+                                    record++;
+                                    result.setText(result.getText() + String.valueOf(record) + ". ");
+                                    for (int j = 0; j < result_tmp.get(i).size(); j++) {
+                                        result.setText(result.getText() + " " + result_tmp.get(i).get(j));
+                                    }
+                                    result.setText(result.getText() + "\n");
+                                }
+                            }
+                        }
+                        else {
+                            result.setText("");
+                            result.setText("Nie znaleziono nikogo");
+                        }
+                    }
+                });
 
+                logout.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        nameSearch.dispose();
+                        WelcomeScr.window(true);
+                    }
+                });
+                back.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        nameSearch.dispose();
+                        Choice.window(true, user);
+                    }
+                });
             }
         });
         logout.addActionListener(new ActionListener() {
@@ -119,16 +251,16 @@ public class Search {
         });
     }
 
-    private static Vector<Vector<String>> searchResult(String user, String name) {
+    private static Vector<Vector<String>> searchSystem(String user, String value, int a) {
         Vector<Vector<String>> result = new Vector<>();
-        if(!name.equals("")) {
+        if(!value.equals("")) {
             try (Scanner in = new Scanner(new File("./data.txt"))) {
                 while (in.hasNextLine()) {
                     Vector<String> str = new Vector<>();
                     String tmp = in.nextLine();
                     String[] fromFile = tmp.split(",");
                     if (fromFile[0].equals(user)) {
-                        if (fromFile[1].equals(name)) {
+                        if (fromFile[a].equals(value)) {
                             str.addElement(fromFile[1]);
                             str.addElement(fromFile[2]);
                             str.addElement(fromFile[3]);

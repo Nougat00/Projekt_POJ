@@ -12,6 +12,8 @@ public class Add {
         JFrame frame = new JFrame("Organizer");
         JPanel main = new JPanel(new BorderLayout());
         frame.setSize(500, 350);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
         JPanel text = new JPanel(new GridLayout(8, 1, 5, 5));
         JPanel buttons = new JPanel(new GridLayout(1, 4, 5, 5));
         JLabel name = new JLabel("Imie i nazwisko");

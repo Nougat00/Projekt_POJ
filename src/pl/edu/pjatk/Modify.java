@@ -12,6 +12,8 @@ public class Modify {
     public static void window(boolean open, String user) {
         JFrame nameSearch = new JFrame("Organizer");
         nameSearch.setSize(500, 180);
+        nameSearch.setResizable(false);
+        nameSearch.setLocationRelativeTo(null);
         JPanel main = new JPanel(new BorderLayout());
         JButton logout = new JButton("Wyloguj");
         JButton back = new JButton("Cofnij");

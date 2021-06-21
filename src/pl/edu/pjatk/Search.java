@@ -14,6 +14,8 @@ public class Search {
         JFrame frame = new JFrame("Organizer");
         JPanel main = new JPanel(new BorderLayout());
         frame.setSize(500, 180);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
         JPanel buttons = new JPanel(new GridLayout(1, 4, 5, 5));
         JButton name = new JButton("Imie i nazwisko");
         JButton date = new JButton("Data urodzenia");
@@ -41,6 +43,8 @@ public class Search {
                 frame.dispose();
                 JFrame nameSearch = new JFrame("Organizer");
                 nameSearch.setSize(500, 180);
+                nameSearch.setResizable(false);
+                nameSearch.setLocationRelativeTo(null);
                 JPanel main = new JPanel(new BorderLayout());
                 JButton logout = new JButton("Wyloguj");
                 JButton back = new JButton("Cofnij");
@@ -106,6 +110,8 @@ public class Search {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
                 JFrame nameSearch = new JFrame("Organizer");
+                nameSearch.setResizable(false);
+                nameSearch.setLocationRelativeTo(null);
                 nameSearch.setSize(500, 180);
                 JPanel main = new JPanel(new BorderLayout());
                 JButton logout = new JButton("Wyloguj");

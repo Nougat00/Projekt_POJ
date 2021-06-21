@@ -6,9 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Choice {
-
     public static void window(boolean open, String user) {
         JFrame frame = new JFrame("Organizer");
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
         JPanel main = new JPanel(new BorderLayout());
         frame.setSize(500, 180);
         JPanel buttons = new JPanel(new GridLayout(1,4,5,5));

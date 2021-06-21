@@ -19,6 +19,8 @@ public class WelcomeScr {
         JPanel firstScreen = new JPanel(new GridLayout(5,1,5,5));
         JTextField login=new JTextField();
         JTextField pass=new JTextField();
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
         JButton log = new JButton("Login");
         JButton exit=new JButton("EXIT");
         JLabel mess=new JLabel();

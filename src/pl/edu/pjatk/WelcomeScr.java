@@ -63,10 +63,8 @@ public class WelcomeScr {
             for (int i = 0; i < fromFile.length; i=i+2) {
                 if(fromFile[i].equals(login))
                 {
-                    System.out.println("penis");
                     if(fromFile[i+1].equals(pass))
                     {
-                        System.out.println("cipa");
                         return true;
                     }
                     else flag=false;

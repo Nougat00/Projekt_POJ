@@ -46,7 +46,8 @@ public class Search {
                 JButton back = new JButton("Cofnij");
                 JButton search = new JButton("Szukaj");
                 JTextField text = new JTextField();
-                JLabel result = new JLabel();
+                JTextArea result = new JTextArea();
+                result.setEditable(false);
                 JPanel upPanel = new JPanel(new GridLayout(1, 2));
                 JPanel downPanel = new JPanel(new GridLayout(1, 2));
                 upPanel.add(text);
@@ -62,16 +63,26 @@ public class Search {
                 search.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        Vector<Vector<String>> result_tmp=new Vector<>();
                         if(searchResult(user, text.getText()).size()>0){
-                            for (int i = 0; i <searchResult(user, text.getText()).size(); i++) {
-                                result.setText(result.getText()+String.valueOf(i)+". ");
-                                for (int j = 0; j < searchResult(user, text.getText()).get(i).size(); j++) {
-                                    result.setText(result.getText()+" "+searchResult(user,text.getText()).get(i).get(j));
+                            result.setText("");
+                            result_tmp=searchResult(user, text.getText());
+                            int record=0;
+                            for (int i = 0; i <result_tmp.size(); i++) {
+                                if(!result_tmp.get(i).isEmpty()) {
+                                    record++;
+                                    result.setText(result.getText() + String.valueOf(record) + ". ");
+                                    for (int j = 0; j < result_tmp.get(i).size(); j++) {
+                                        result.setText(result.getText() + " " + result_tmp.get(i).get(j));
+                                    }
+                                    result.setText(result.getText() + "\n");
                                 }
-                                result.setText("\n");
                             }
                         }
-                        else result.setText("Nie znaleziono nikogo");
+                        else {
+                            result.setText("");
+                            result.setText("Nie znaleziono nikogo");
+                        }
                     }
                 });
                 logout.addActionListener(new ActionListener() {
@@ -109,23 +120,29 @@ public class Search {
     }
 
     private static Vector<Vector<String>> searchResult(String user, String name) {
-        Vector<Vector<String>> result = null;
-        try (Scanner in = new Scanner(new File("./data.txt"))) {
-            Vector<String> str = null;
-            while (in.hasNext()) {
-                String[] fromFile = in.nextLine().split(",");
-                if (fromFile[0].equals(user)) {
-                    for (int i = 1; i < fromFile.length; i++) {
-                        System.out.println(fromFile[i]);
-                        str.add(fromFile[i]);
+        Vector<Vector<String>> result = new Vector<>();
+        if(!name.equals("")) {
+            try (Scanner in = new Scanner(new File("./data.txt"))) {
+                while (in.hasNextLine()) {
+                    Vector<String> str = new Vector<>();
+                    String tmp = in.nextLine();
+                    String[] fromFile = tmp.split(",");
+                    if (fromFile[0].equals(user)) {
+                        if (fromFile[1].equals(name)) {
+                            str.addElement(fromFile[1]);
+                            str.addElement(fromFile[2]);
+                            str.addElement(fromFile[3]);
+                            str.addElement(fromFile[4]);
+                        }
+                        result.add(str);
                     }
-                    result.add(str);
                 }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return result;
         }
-        return result;
+        else return result;
     }
 }
 

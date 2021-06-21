@@ -60,12 +60,11 @@ public class Add {
             public void actionPerformed(ActionEvent e) {
                 try (Scanner in = new Scanner(new File("./data.txt"))) {
                     boolean flag = true;
-                    while (in.hasNext()) {
+                    while (in.hasNextLine()) {
                         String[] fromFile = in.nextLine().split(",");
                         for (int i = 0; i < fromFile.length; i += 5) {
 
                             if (user.equals(fromFile[i]) && namebox.getText().equals(fromFile[i + 1]) && datebox.getText().equals(fromFile[i + 2]) && adresbox.getText().equals(fromFile[i + 3]) && avatarbox.getText().equals(fromFile[i + 4])) {
-                                System.out.println("penis");
                                 flag = false;
                                 message.setText("Takie dane zostały już dodane z twojego konta...");
                             }
@@ -100,7 +99,7 @@ public class Add {
 
     protected static void dataAdd(String user, String name, String date, String adres, String avatar) throws IOException {
             BufferedWriter bw = new BufferedWriter(new FileWriter("data.txt", true));
-            bw.append(user + "," + name + "," + date + "," + adres + "," + avatar);
+            bw.append(user + "," + name + "," + date + "," + adres + "," + avatar+",");
             bw.append("\n");
             bw.close();
     }

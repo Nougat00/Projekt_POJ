@@ -12,21 +12,23 @@ import java.util.Vector;
 public class Choice {
     public static void window(boolean open, String user) {
         JFrame frame = new JFrame("Organizer");
+        JPanel main = new JPanel(new GridLayout(3,1));
+        frame.setSize(600, 300);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        JPanel main = new JPanel(new GridLayout(3,1));
-        frame.setSize(500, 300);
         JPanel buttons = new JPanel(new GridLayout(1,4,5,5));
         JButton add = new JButton("Dodaj");
         JButton modify = new JButton("Zmodyfikuj");
         JButton delete = new JButton("Usuń");
         JButton search = new JButton("Szukaj");
+        JButton showAvatar= new JButton("Pokaż avatar");
         JTextArea result = new JTextArea();
         result.setEditable(false);
         buttons.add(add);
         buttons.add(search);
         buttons.add(modify);
         buttons.add(delete);
+        buttons.add(showAvatar);
         JButton logout = new JButton("Wyloguj");
         main.add(result);
         main.add(buttons);
@@ -83,6 +85,12 @@ public class Choice {
            public void actionPerformed(ActionEvent e) {
                Delete.window(true,user);
                frame.dispose();
+           }
+       });
+       showAvatar.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               Avatar.window(true, user);
            }
        });
 

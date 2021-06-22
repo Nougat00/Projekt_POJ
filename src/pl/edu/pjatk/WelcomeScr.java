@@ -18,7 +18,7 @@ public class WelcomeScr {
         frame.setSize(288, 350);
         JPanel firstScreen = new JPanel(new GridLayout(5,1,5,5));
         JTextField login=new JTextField();
-        JTextField pass=new JTextField();
+        JPasswordField pass=new JPasswordField();
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         JButton log = new JButton("Login");

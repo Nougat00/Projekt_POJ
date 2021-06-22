@@ -1,6 +1,8 @@
 package pl.edu.pjatk;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,10 +26,12 @@ public class Add {
         JTextField adresbox = new JTextField();
         JLabel avatar = new JLabel("Avatar");
         JTextField avatarbox = new JTextField();
+        avatarbox.setEditable(false);
         JLabel message = new JLabel();
         message.setMaximumSize(new Dimension(15, 5));
         JButton add = new JButton("Dodaj");
         JButton back = new JButton("Cofnij");
+        JButton select= new JButton("Otwórz");
         text.add(name);
         text.add(namebox);
         text.add(date);
@@ -37,6 +41,7 @@ public class Add {
         text.add(avatar);
         text.add(avatarbox);
         text.add(message);
+        text.add(select);
         buttons.add(add);
         buttons.add(back);
         JButton logout = new JButton("Wyloguj");
@@ -57,6 +62,7 @@ public class Add {
                 WelcomeScr.window(true);
             }
         });
+
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -95,9 +101,30 @@ public class Add {
                 Choice.window(true, user);
             }
         });
+        select.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                avatarbox.setText(path());
+            }
+        });
     }
 
+    protected static String path()
+    {
+        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        jfc.setDialogTitle("Zaznacz avatar który chcesz użyć");
+        jfc.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Tylko obrazy w formacie jpg", "jpg", "jpeg");
+        jfc.addChoosableFileFilter(filter);
+        int returnValue = jfc.showOpenDialog(null);
 
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+
+            File selectedFile = jfc.getSelectedFile();
+            return selectedFile.getAbsolutePath();
+        }
+        return null;
+    }
 
     protected static void dataAdd(String user, String name, String date, String adres, String avatar) throws IOException {
             BufferedWriter bw = new BufferedWriter(new FileWriter("data.txt", true));

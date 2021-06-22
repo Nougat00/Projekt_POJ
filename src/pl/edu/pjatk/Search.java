@@ -68,9 +68,9 @@ public class Search {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         Vector<Vector<String>> result_tmp=new Vector<>();
-                        if(searchSystem(user, text.getText(), 2).size()>0){
+                        if(searchSystem(user, text.getText(), 1).size()>0){
                             result.setText("");
-                            result_tmp=searchSystem(user, text.getText(),2);
+                            result_tmp=searchSystem(user, text.getText(), 1);
                             int record=0;
                             for (int i = 0; i <result_tmp.size(); i++) {
                                 if(!result_tmp.get(i).isEmpty()) {
@@ -181,6 +181,8 @@ public class Search {
                 JFrame nameSearch = new JFrame("Organizer");
                 nameSearch.setSize(500, 180);
                 JPanel main = new JPanel(new BorderLayout());
+                nameSearch.setResizable(false);
+                nameSearch.setLocationRelativeTo(null);
                 JButton logout = new JButton("Wyloguj");
                 JButton back = new JButton("Cofnij");
                 JButton search = new JButton("Szukaj");

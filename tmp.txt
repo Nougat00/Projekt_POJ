@@ -1,5 +1,4 @@
 user,sadasd,asdasda,asdasd,asda,
 user,user,user,user,user,
-admin,ian,sdniaondasd,nasonfoasda,dupa,
-admin,ian,sdniaondasdas,nasonfoasdas,dupa,
-admin,Darek Karasiewicz,22/09/2000,Gdańsk,Dupa,
+admin,Darek Karasiewicz,22/09/2000,Gdańsk,Karś.jpg,
+admin,Bartosz Laskowski,22/02/2000,Gdańsk,świnka.jpg,

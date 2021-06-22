@@ -1,5 +1,6 @@
 package pl.edu.pjatk;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -60,6 +61,21 @@ public class Delete {
                         result.setText(result.getText() + "\n");
                     }
                 }
+                AudioInputStream audioInputStream = null;
+                try {
+                    audioInputStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\barte\\Documents\\PJAKT\\OneDrive - Polsko-Japońska Akademia Technik Komputerowych\\POJ\\Projekt_POJ\\src\\pl\\edu\\pjatk\\trash.wav").getAbsoluteFile());
+                    Clip clip = AudioSystem.getClip();
+                    clip.open(audioInputStream);
+                    clip.start();
+                } catch (UnsupportedAudioFileException f) {
+                    f.printStackTrace();
+                } catch (IOException f) {
+                    f.printStackTrace();
+                } catch (LineUnavailableException f) {
+                    f.printStackTrace();
+                }
+                nameSearch.dispose();
+                Choice.window(true, user);
             }
         });
         back.addActionListener(new ActionListener() {

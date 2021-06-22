@@ -110,9 +110,6 @@ public class Search {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
                 JFrame nameSearch = new JFrame("Organizer");
-                nameSearch.setResizable(false);
-                nameSearch.setLocationRelativeTo(null);
-                nameSearch.setSize(500, 180);
                 JPanel main = new JPanel(new BorderLayout());
                 JButton logout = new JButton("Wyloguj");
                 JButton back = new JButton("Cofnij");
@@ -130,7 +127,10 @@ public class Search {
                 main.add(result, BorderLayout.CENTER);
                 main.add(downPanel, BorderLayout.SOUTH);
                 nameSearch.add(main);
+                nameSearch.setSize(500, 180);
                 nameSearch.setVisible(true);
+                nameSearch.setResizable(false);
+                nameSearch.setLocationRelativeTo(null);
                 nameSearch.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 search.addActionListener(new ActionListener() {
                     @Override

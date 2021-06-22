@@ -75,12 +75,6 @@ public class Avatar {
         JButton back = new JButton();
         Vector<Vector<String>> result = new Vector<>();
         result=searchSystem(user);
-        for (int i = 0; i < result.size(); i++) {
-            for (int j = 0; j < result.get(i).size(); j++) {
-                System.out.println(result.get(i).get(j));
-            }
-        }
-
         ImagePanel panel = new ImagePanel(new ImageIcon(result.get(record-1).get(3)).getImage());
         image.getContentPane().add(panel);
         image.setSize(panel.w+15, panel.h+30);

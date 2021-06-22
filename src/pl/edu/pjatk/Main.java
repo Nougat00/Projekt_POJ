@@ -1,7 +1,6 @@
 package pl.edu.pjatk;
 
 import javax.sound.sampled.*;
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -21,8 +20,5 @@ public class Main {
         } catch (LineUnavailableException f) {
             f.printStackTrace();
         }
-        //JFileChooser j = new JFileChooser();
-        //j.showSaveDialog(null);
-        //Modify.window(true, "admin");
     }
 }

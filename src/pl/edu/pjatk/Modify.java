@@ -45,8 +45,7 @@ public class Modify {
         modify.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (text.getText().equals(""))
-                {
+                if (text.getText().equals("")) {
                     result.setText("Wpisz rekord");
                 }
                 modifier(user, Integer.parseInt(text.getText()));
@@ -206,7 +205,7 @@ public class Modify {
         BufferedWriter dataReplace = new BufferedWriter(new FileWriter("data.txt", true));
         try (Scanner out = new Scanner(new File("./tmp.txt"))) {
             while (out.hasNextLine()) {
-                String tmp=out.nextLine();
+                String tmp = out.nextLine();
                 System.out.println(tmp);
                 dataReplace.append(tmp);
                 dataReplace.append("\n");
